@@ -66,6 +66,7 @@ https://quasar.dev/quasar-cli/developing-cordova-apps/publishing-to-store#Androi
 ```
 quasar build -m cordova -T
 
+**locate hypersign-release-key.keystore**
 ```
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore hypersign-release-key.keystore /Users/vikrambhushan/Documents/hypersign-mobile/src-cordova/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk my_keystone
 ```
