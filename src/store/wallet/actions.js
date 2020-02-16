@@ -41,7 +41,7 @@ export function generate ({ state, commit, rootState, dispatch }, value) {
             apiObject.email = email
             apiObject.publickey = address
             apiObject.companyid = 'playground'
-            auth.registration(apiObject)
+            auth.registration(rootState, apiObject)
               .then(res => {
                 if (res.data.status === 'SUCCESS') {
                   dispatch('addSeedStore', randomSeed)
@@ -108,7 +108,7 @@ export function newAddress ({ state, commit }, password) {
   // })
 }
 
-export function signMessageTx ({ state, commit, dispatch }, rawMsg) {
+export function signMessageTx ({ state, commit, rootState, dispatch }, rawMsg) {
   return new Promise((resolve, reject) => {
     // debugger
     dispatch('scanQr', rawMsg)
@@ -126,7 +126,7 @@ export function signMessageTx ({ state, commit, dispatch }, rawMsg) {
               apiObject.publickey = state.address
               apiObject.companyid = 'playground'
               tx
-                .sign(apiObject)
+                .sign(rootState, apiObject)
                 .then(res => {
                   if (res.data.status === 'SUCCESS') {
                     resolve(signedMsgRSV)

@@ -32,6 +32,7 @@
         </q-item-section>
       </q-item>
     </q-list>
+    <q-btn color="primary" @click="testAxios" >Test Me</q-btn>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
       <q-fab color="purple" icon="keyboard_arrow_up" direction="up">
         <q-fab-action color="primary" @click="onClick" icon="phonelink_ring" />
@@ -43,6 +44,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'Signtx',
   computed: {

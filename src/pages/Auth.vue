@@ -7,7 +7,17 @@
     ).authentication.q-gutter-md
       router-link(to='/')
         img(src='/statics/hypersign-logo-new.png', alt='Logo', height='120').authentication__logo
-
+      q-input(
+        v-if='isRegisterUser'
+        lazy-rules
+        outlined
+        autocomplete='BaseUrl'
+        data-cy='baseUrl'
+        label='Base Url'
+        type='text'
+        v-model='baseUrl'
+        :rules="[val => !!val || '*Field is required']"
+      )
       q-input(
         v-if='isRegisterUser'
         lazy-rules
@@ -19,7 +29,6 @@
         v-model='name'
         :rules="[val => !!val || '*Field is required']"
       )
-
       q-input(
         v-if='isRegisterUser'
         lazy-rules
@@ -86,6 +95,7 @@ export default {
   },
   data () {
     return {
+      baseUrl: null,
       isPwd: true,
       loading: false,
       password: null,
@@ -99,9 +109,9 @@ export default {
       'generate'
     ]),
     ...mapActions('user', [
-      'authenticate'
+      'authenticate',
+      'setBaseUrl'
     ]),
-
     checkCredentials () {
       console.log(this.$registerUser)
       if (this.email === '' || this.password === '') {
@@ -116,11 +126,13 @@ export default {
         throw new Error('Credentials are invalid.')
       }
     },
-    register () {
+    async register () {
       this.loading = true
+      let x = await this.setBaseUrl(this.baseUrl)
       this.$store.commit('user/UPDATE_PASSWORD', this.password)
       this.$store.commit('user/UPDATE_NAME', this.name)
       this.$store.commit('user/UPDATE_EMAIL', this.email)
+      console.log(x)
       this.generate()
         .then(res => {
           this.onReset()

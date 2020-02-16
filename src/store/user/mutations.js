@@ -10,6 +10,10 @@ export function UPDATE_MESSAGE (state, value) {
   state.message = value
 }
 
+export function UPDATE_BASEURL (state, value) {
+  state.baseUrl = value
+}
+
 export function UPDATE_EMAIL (state, value) {
   state.email = value
 }

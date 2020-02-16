@@ -1,5 +1,8 @@
 import { Notify } from 'quasar'
 
+export function setBaseUrl ({ state, commit, rootState, dispatch }, params) {
+  commit('UPDATE_BASEURL', params)
+}
 export function authenticate ({ state, commit, rootState, dispatch }, value) {
   return new Promise((resolve, reject) => {
     let password = state.password

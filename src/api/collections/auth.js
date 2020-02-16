@@ -1,7 +1,10 @@
 import { axiosInstance } from '../../boot/axios'
 
 export default {
-  login: (payload) => axiosInstance.post('/api/login', payload),
+  login: (state, payload) => {
+    axiosInstance.baseURL = state.user.baseUrl
+    return axiosInstance.post(state.user.baseUrl + '/api/login', payload)
+  },
 
   /**
    * {
@@ -11,5 +14,10 @@ export default {
     "companyid" : "playground"
     }
   */
-  registration: (payload) => axiosInstance.post('/register', payload)
+  registration: (state, payload) => {
+    console.log(state)
+    axiosInstance.baseURL = state.user.baseUrl
+    return axiosInstance.post(state.user.baseUrl + '/register', payload)
+  }
+
 }

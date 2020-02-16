@@ -3,7 +3,7 @@ import { Notify } from 'quasar'
 let notif = () => void 0
 
 const axiosInstance = axios.create({
-  baseURL: process.env.API,
+  // baseURL: process.env.API,
   timeout: 5000 // request timeout
 })
 
