@@ -39,8 +39,8 @@ export function generate ({ state, commit, rootState, dispatch }, value) {
             let apiObject = {}
             apiObject.username = name
             apiObject.email = email
-            apiObject.publickey = address
-            apiObject.companyid = 'playground'
+            apiObject.publickey = address[0]
+            apiObject.companyid = 'hs-playground-local'
             auth.registration(rootState, apiObject)
               .then(res => {
                 if (res.data.status === 'SUCCESS') {
