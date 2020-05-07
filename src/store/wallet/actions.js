@@ -8,6 +8,35 @@ export function addSeedStore ({ commit }, value) {
   commit('UPDATE_SEEDSTORE', value)
 }
 
+export function generatePvtKeyFromSeed ({ state, commit, rootState, dispatch }, password) {
+  return new Promise((resolve, reject) => {
+    if (!password) {
+      Notify.create({
+        classes: 'text-weight-bold text-center',
+        color: 'negative',
+        position: 'top-right',
+        message: 'Your credentials are invalid.'
+      })
+      reject('Password is empty!')
+    }
+    let randomSeed = state.seedstore
+    lightwallet.keystore.createVault({
+      password: password,
+      seedPhrase: randomSeed,
+      hdPathString: "m/0'/0'/0'"
+    }, (err, ks) => {
+      if (err) reject(err)
+      else {
+        commit('UPDATE_KEYSTORE', ks)
+        dispatch('newAddress', password)
+          .then(address => {
+            resolve(randomSeed)
+          })
+      }
+    })
+  })
+}
+
 export function generate ({ state, commit, rootState, dispatch }, value) {
   return new Promise((resolve, reject) => {
     let password = rootState.user.password
@@ -40,7 +69,7 @@ export function generate ({ state, commit, rootState, dispatch }, value) {
             apiObject.username = name
             apiObject.email = email
             apiObject.publickey = address[0]
-            apiObject.companyid = 'hs-playground-local'
+            apiObject.companyid = 'master'
             auth.registration(rootState, apiObject)
               .then(res => {
                 if (res.data.status === 'SUCCESS') {
@@ -118,13 +147,14 @@ export function signMessageTx ({ state, commit, rootState, dispatch }, rawMsg) {
             // code to remove later
             let signedMsgRSV = lightwallet.signing.signMsg(state.keystore, state.privateKey, rawTextFromQr, state.address[0])
             if (signedMsgRSV) {
+              let requestObject = JSON.parse(rawTextFromQr)
               let apiObject = {}
               apiObject.rawMsg = rawTextFromQr
-              apiObject.ksSessionId = signedMsgRSV
-              apiObject.challenge = signedMsgRSV
-              apiObject.signedRsv = signedMsgRSV
-              apiObject.publickey = state.address
-              apiObject.companyid = 'playground'
+              apiObject.ksSessionId = requestObject.kcSessionId
+              apiObject.challenge = requestObject.hsSessionId
+              apiObject.signedRsv = JSON.stringify(signedMsgRSV)
+              apiObject.publicKey = state.address[0]
+              apiObject.companyId = 'master'
               tx
                 .sign(rootState, apiObject)
                 .then(res => {
@@ -155,7 +185,7 @@ export function scanQr ({ state, commit }, rawMsg) {
                 classes: 'text-weight-bold text-center',
                 color: 'positive',
                 position: 'top-right',
-                message: 'Text on QR scan : ' + result.text
+                message: 'Text on QR scan : ' + result.text + 'pubkey:' + state.address[0]
               })
               resolve(result.text)
             } catch (err) {

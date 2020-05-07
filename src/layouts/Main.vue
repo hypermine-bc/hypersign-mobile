@@ -5,7 +5,7 @@
         <q-toolbar-title>
           <span>Hypersign</span>
         </q-toolbar-title>
-        <q-btn dense flat round icon="mdi-dots-vertical" @click="right = !right" />
+        <q-btn dense flat round icon="exit_to_app" @click="logout()" />
       </q-toolbar>
     </q-header>
     <q-drawer show-if-above v-model="right" side="right" bordered>
@@ -45,7 +45,11 @@ export default {
     }
   },
   methods: {
-    openURL
+    openURL,
+    logout () {
+      this.$store.commit('wallet/UPDATE_ADDRESS', '')
+      this.$router.push('/auth/login')
+    }
   }
 }
 </script>

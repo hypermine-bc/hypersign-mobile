@@ -6,12 +6,13 @@ export default ({ router, store, Vue }) => {
   router.beforeEach((to, from, next) => {
     NProgress.start()
     if (store.state.wallet.address !== '') {
-      if (to.path === '/auth/login') {
-        next({ path: '/' })
-        NProgress.done() // if current page is dashboard will not trigger afterEach hook, so manually handle it
-      } else {
-        next()
-      }
+      next()
+      // // if (to.path === '/auth/login') {
+      //   next({ path: '/' })
+      //   NProgress.done() // if current page is dashboard will not trigger afterEach hook, so manually handle it
+      // } else {
+      //   next()
+      // }
     } else {
       if (whiteList.indexOf(to.path) !== -1) {
         next()

@@ -8,7 +8,13 @@ export function authenticate ({ state, commit, rootState, dispatch }, value) {
     let password = state.password
     let res = password === value
     if (res) {
-      resolve(res)
+      dispatch('wallet/generatePvtKeyFromSeed', password, { root: true })
+        .then(res => {
+          resolve(res)
+        })
+        .catch(err => {
+          reject(err)
+        })
     } else {
       Notify.create({
         classes: 'text-weight-bold text-center',
