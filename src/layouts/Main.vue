@@ -37,6 +37,10 @@ import copyRight from 'components/CopyRight.vue'
 export default {
   name: 'Main',
   components: { copyRight },
+  beforeDestroy () {
+    this.$store.commit('wallet/UPDATE_ADDRESS', '')
+    this.$store.commit('wallet/UPDATE_SEEDSTORE', {})
+  },
   data () {
     return {
       tab: 'wallet',

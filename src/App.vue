@@ -7,9 +7,6 @@
 <script>
 export default {
   name: 'App',
-  beforeDestroy () {
-    this.$store.commit('wallet/UPDATE_ADDRESS', '')
-  }
 }
 </script>
 
