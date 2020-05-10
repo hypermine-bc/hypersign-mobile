@@ -8,15 +8,15 @@
         <q-btn dense flat round icon="exit_to_app" @click="logout()" />
       </q-toolbar>
     </q-header>
-    <q-drawer show-if-above v-model="right" side="right" bordered>
-      <q-btn-dropdown auto-close="" stretch="" flat="" icon="person">
-        <q-list>
-          <q-item to="/auth/register">
-              <q-item-section>Logoff</q-item-section>
-          </q-item>
-        </q-list>
-      </q-btn-dropdown>
-    </q-drawer>
+    //- <q-drawer show-if-above v-model="right" side="right" bordered>
+    //-   <q-btn-dropdown auto-close="" stretch="" flat="" icon="person">
+    //-     <q-list>
+    //-       <q-item to="/auth/register">
+    //-           <q-item-section>Logoff</q-item-section>
+    //-       </q-item>
+    //-     </q-list>
+    //-   </q-btn-dropdown>
+    //- </q-drawer>
     <q-footer height-hint="98" class="footer-height">
       <q-tabs class="bg-primary text-white" align="justify" >
         <q-route-tab v-model="tab" name="wallet" icon="account_balance_wallet" to="/" ></q-route-tab>
@@ -39,7 +39,7 @@ export default {
   components: { copyRight },
   beforeDestroy () {
     this.$store.commit('wallet/UPDATE_ADDRESS', '')
-    this.$store.commit('wallet/UPDATE_SEEDSTORE', {})
+    this.$store.commit('wallet/UPDATE_KEYSTORE', {})
   },
   data () {
     return {
@@ -52,6 +52,7 @@ export default {
     openURL,
     logout () {
       this.$store.commit('wallet/UPDATE_ADDRESS', '')
+      this.$store.commit('wallet/UPDATE_KEYSTORE', {})
       this.$router.push('/auth/login')
     }
   }

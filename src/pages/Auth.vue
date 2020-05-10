@@ -128,11 +128,10 @@ export default {
     },
     async register () {
       this.loading = true
-      let x = await this.setBaseUrl(this.baseUrl)
+      await this.setBaseUrl(this.baseUrl)
       this.$store.commit('user/UPDATE_PASSWORD', this.password)
       this.$store.commit('user/UPDATE_NAME', this.name)
       this.$store.commit('user/UPDATE_EMAIL', this.email)
-      
       this.generate()
         .then(res => {
           this.onReset()
@@ -140,9 +139,8 @@ export default {
         })
         .catch(err => {
           this.loading = false
+          console.error(err)
         })
-        
-        this.loading = false
     },
     login () {
       this.loading = true
@@ -156,6 +154,7 @@ export default {
           this.loading = false
           console.error(err)
         })
+      this.loading = false
     },
     performAuthentication () {
       return this.isRegisterUser

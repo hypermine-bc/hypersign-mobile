@@ -75,6 +75,8 @@ export function generate ({ state, commit, rootState, dispatch }, value) {
                 if (res.data.status === 'SUCCESS') {
                   dispatch('addSeedStore', randomSeed)
                   resolve(randomSeed)
+                  commit('UPDATE_KEYSTORE', {})
+
                   this.$router.push('/auth/login')
                 } else {
                   Notify.create({
