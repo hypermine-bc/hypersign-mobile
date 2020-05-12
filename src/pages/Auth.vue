@@ -149,7 +149,7 @@ export default {
         .then(res => {
           this.loading = false
           this.onReset()
-          this.$router.push('/')
+          this.$router.push('/signtx')
         })
         .catch(err => {
           this.loading = false
