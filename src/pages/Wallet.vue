@@ -20,6 +20,11 @@
             <p class="address">{{item}}</p>
           </div>
         </div>
+        <div class="columns">
+          <div class="column">
+            <p>Email: <label>{{user.email}}</label></p>
+          </div>
+        </div>
         <!-- <div class="columns">
           <div class="column is-one-quarter">
             <p>Privatekey</p>

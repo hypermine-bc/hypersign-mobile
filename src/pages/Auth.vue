@@ -7,17 +7,17 @@
     ).authentication.q-gutter-md
       router-link(to='/')
         img(src='statics/hypersign-logo-new.png', alt='Logo', height='120').authentication__logo
-      q-input(
-        v-if='isRegisterUser'
-        lazy-rules
-        outlined
-        autocomplete='BaseUrl'
-        data-cy='baseUrl'
-        label='Base Url'
-        type='text'
-        v-model='baseUrl'
-        :rules="[val => !!val || '*Field is required']"
-      )
+      //- q-input(
+      //-   v-if='isRegisterUser'
+      //-   lazy-rules
+      //-   outlined
+      //-   autocomplete='BaseUrl'
+      //-   data-cy='baseUrl'
+      //-   label='Base Url'
+      //-   type='text'
+      //-   v-model='baseUrl'
+      //-   :rules="[val => !!val || '*Field is required']"
+      //- )
       q-input(
         v-if='isRegisterUser'
         lazy-rules
@@ -45,7 +45,9 @@
         outlined
         autocomplete="current-password new-password"
         data-cy='password'
-        label='PASSWORD'
+        label='PIN'
+        maxlength=6
+        minlength=4
         v-model='password'
         :rules="[val => !!val || '*Field is required']"
         :type="isPwd ? 'password' : 'text'"
@@ -60,9 +62,8 @@
       .flex.justify-between
         span.text-body1 {{ $route.name }} or&nbsp;
           .inline(v-if='!isRegisterUser', data-cy='userRegLink')
-            | register a&nbsp;
-            router-link(to='/auth/register' class='text-primary')
-              | new user.
+            router-link(to='/auth/register' class='text-primary underline')
+              | Register as new user.
           .inline(v-else, data-cy='loginLink')
             router-link(to='/auth/login' class='text-primary') log in.
         q-btn(
@@ -95,7 +96,7 @@ export default {
   },
   data () {
     return {
-      baseUrl: null,
+      baseUrl: 'https://www.hsauth.hypermine.in/keycloak/auth/realms/master/hypersign',
       isPwd: true,
       loading: false,
       password: null,
@@ -170,6 +171,11 @@ export default {
   }
 }
 </script>
+<style >
+  .underline{
+    text-decoration: underline !important;
+  }
+</style>
 
 <style lang='stylus'>
 // variable place holder

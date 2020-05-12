@@ -1,6 +1,6 @@
 <template >
   <q-page class="q-pa-lg">
-    <q-list bordered padding class="rounded-borders" style="max-width: 350px">
+    <q-list bordered padding class="rounded-borders" style="max-width: 350px" v-if="apps.length>0">
       <div>
         <span class="header width-50">Your Keys </span>
         <span class="header width-50"><a @click="clearOldSession"><q-icon name="delete" /></a></span>
@@ -24,6 +24,9 @@
       </q-item>
       <q-separator spaced ></q-separator>
     </q-list>
+    <q-item-label v-else >
+      Scan QR to see sessions
+    </q-item-label>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
       <q-fab color="purple" icon="keyboard_arrow_up" direction="up">
         <!-- <q-fab-action color="primary" @click="onClick" icon="phonelink_ring" /> -->

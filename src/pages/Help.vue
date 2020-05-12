@@ -2,7 +2,7 @@
   <q-page class="q-pa-lg">
     <div class="container">
         <div class="columns text-center">
-          <img class="help-logo" src="http://www.hypermine.in/hypersign/wp-content/uploads/2019/03/cropped-Only_Logo-192x192.png"/>
+          <img class="help-logo" src="https://hypermine.in/hypersign/wp-content/uploads/2020/01/bg_overlay.png"/>
         </div>
     </div>
     <div class="container">
@@ -19,7 +19,7 @@
       <q-list link >
         <q-item tag="label" v-ripple>
           <q-item-section avatar top>
-            <q-checkbox v-model="color" val="cyan" color="#012F2F" />
+            <q-btn dense flat round icon="check_box"  color="#012F2F" />
           </q-item-section>
           <q-item-section>
             <q-item-label caption>
@@ -29,7 +29,7 @@
         </q-item>
         <q-item tag="label" v-ripple>
           <q-item-section avatar top>
-            <q-checkbox v-model="color" val="cyan" color="#012F2F" />
+            <q-btn dense flat round icon="check_box"  color="#012F2F" />
           </q-item-section>
           <q-item-section>
             <q-item-label caption>
@@ -39,7 +39,7 @@
         </q-item>
         <q-item tag="label" v-ripple>
           <q-item-section avatar top>
-            <q-checkbox v-model="color" val="cyan" color="#012F2F" />
+            <q-btn dense flat round icon="check_box"  color="#012F2F" />
           </q-item-section>
           <q-item-section>
             <q-item-label caption>
